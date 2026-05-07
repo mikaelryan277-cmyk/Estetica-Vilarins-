@@ -37,6 +37,10 @@
   .card-gradient {
     @apply bg-gradient-to-br from-zinc-900 to-black;
   }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  }
 }
 
 /* Smooth scroll */
