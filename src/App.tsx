@@ -66,9 +66,9 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
 ];
 
 const WHATSAPP_LINK = "https://wa.me/5599991306420?text=Ol%C3%A1%2C%20gostaria%20de%20marcar%20um%20hor%C3%A1rio.";
-const INSTAGRAM_LINK = "https://www.instagram.com/estetica_lava_vilarinss/"; 
-const APP_INSTAGRAM_LINK = "https://www.instagram.com/estetica_lava_vilarinss/"; // Using web link as primary for stability
-const MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=rua%20avenida%20amanh%C3%A3%20-%20canoeiro%20Graja%C3%BA%20Maranh%C3%A3o";
+const INSTAGRAM_LINK = "https://www.instagram.com/estetica_lava_jato_vilarinss?igsh=aWNjNnNicml3cXp1"; 
+const APP_INSTAGRAM_LINK = "https://www.instagram.com/estetica_lava_jato_vilarinss?igsh=aWNjNnNicml3cXp1"; // Using web link as primary for stability
+const MAPS_LINK = "https://maps.app.goo.gl/FPXgGU2oJGzS9a2w5";
 
 // --- Components ---
 
@@ -162,7 +162,7 @@ const InstagramPreview = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="text-[11px] font-bold text-white leading-none">estetica_vilarins</span>
+            <span className="text-[11px] font-bold text-white leading-none">estetica_lava_jato_vilarinss</span>
             <span className="text-[8px] text-zinc-500 uppercase tracking-tighter">Grajaú, Maranhão</span>
           </div>
         </div>
@@ -353,7 +353,7 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
                 <div className="w-full h-40 rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative">
                   <iframe 
                     title="Google Maps Location"
-                    src="https://maps.google.com/maps?q=rua%20avenida%20amanh%C3%A3%20-%20canoeiro%20Graja%C3%BA%20Maranh%C3%A3o&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    src="https://maps.google.com/maps?q=Grajaú%20Maranhão%20Canoeiro&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                     className="w-full h-full grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
                     style={{ border: 0 }} 
                     allowFullScreen={true} 
@@ -361,6 +361,9 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
                   />
                   <div className="absolute inset-0 pointer-events-none border border-white/5 rounded-2xl shadow-inner"></div>
                 </div>
+                <p className="text-[10px] text-zinc-500 font-medium text-center mt-2 italic px-4">
+                  Estamos localizados ao lado deste ponto.
+                </p>
 
                 <a 
                   href={MAPS_LINK}
