@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --color-brand-purple: #6d28d9; /* purple-700 */
+  --color-brand-dark: #050505;
+  --color-brand-neon: #a78bfa; /* purple-400 for accents */
+  --color-brand-accent: #8b5cf6; /* purple-500 */
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-white font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-white;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/5 shadow-sm;
+  }
+
+  .neon-shadow {
+    box-shadow: 0 4px 30px rgba(109, 40, 217, 0.4);
+  }
+
+  .purple-glow {
+    box-shadow: 0 0 35px rgba(139, 92, 246, 0.35);
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-zinc-900 to-black;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
