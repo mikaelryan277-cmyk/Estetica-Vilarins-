@@ -27,19 +27,19 @@
   }
 
   .neon-shadow {
-    box-shadow: 0 4px 30px rgba(109, 40, 217, 0.4);
+    box-shadow: 0 4px 15px rgba(109, 40, 217, 0.2);
   }
 
   .purple-glow {
-    box-shadow: 0 0 35px rgba(139, 92, 246, 0.35);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
   }
 
   .card-gradient {
-    @apply bg-gradient-to-br from-zinc-900 to-black;
+    @apply bg-zinc-900;
   }
 
   .text-glow {
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    text-shadow: 0 0 5px rgba(139, 92, 246, 0.2);
   }
 }
 

@@ -80,10 +80,10 @@ const SchedulingAccordion = ({ selected, onToggle }: { selected: Service[], onTo
   return (
     <div className="space-y-3 w-full">
       {SERVICE_CATEGORIES.map((category, idx) => (
-        <div key={idx} className="rounded-2xl border border-white/5 bg-white/2 overflow-hidden transition-all shadow-sm">
+        <div key={idx} className="rounded-2xl border border-white/5 bg-white/[0.02] overflow-hidden transition-colors shadow-sm">
           <button 
             onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-            className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors focus:outline-none"
+            className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-white/5 transition-colors focus:outline-none"
           >
             <div className="flex items-center gap-3">
               <div className="text-brand-accent">{category.icon}</div>
@@ -91,35 +91,35 @@ const SchedulingAccordion = ({ selected, onToggle }: { selected: Service[], onTo
             </div>
             <motion.div
               animate={{ rotate: openIndex === idx ? 180 : 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
             >
               <ChevronDown size={18} className="text-zinc-500" />
             </motion.div>
           </button>
           
-          <AnimatePresence>
+          <AnimatePresence initial={false}>
             {openIndex === idx && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
               >
-                <div className="px-6 pb-6 space-y-2 pt-2 border-t border-white/5 bg-black/20">
+                <div className="px-6 pb-6 space-y-2 pt-2 border-t border-white/5 bg-black/10">
                   {category.services.map((service, sIdx) => {
                     const active = isSelected(service.name);
                     return (
                       <button 
                         key={sIdx} 
                         onClick={() => onToggle(service)}
-                        className={`w-full flex justify-between items-center text-left group p-4 rounded-xl border transition-all duration-500 active:scale-[0.98] ${active ? 'bg-brand-accent/15 border-brand-accent/50 shadow-[0_0_20px_rgba(139,92,246,0.25)] ring-1 ring-brand-accent/20' : 'border-white/5 bg-white/[0.02] hover:border-white/10 hover:bg-white/5'}`}
+                        className={`w-full flex justify-between items-center text-left group p-4 rounded-xl border transition-all duration-300 active:scale-[0.98] ${active ? 'bg-brand-accent/10 border-brand-accent/30 shadow-md ring-1 ring-brand-accent/10' : 'border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/5'}`}
                       >
                         <div className="flex items-start gap-4">
-                          <div className={`mt-1 w-6 h-6 rounded-lg border flex items-center justify-center transition-all duration-500 ${active ? 'bg-brand-accent border-brand-accent text-white shadow-[0_0_10px_rgba(139,92,246,0.5)]' : 'border-white/15 bg-white/5 group-hover:border-white/30'}`}>
+                          <div className={`mt-1 w-6 h-6 rounded-lg border flex items-center justify-center transition-all duration-300 ${active ? 'bg-brand-accent border-brand-accent text-white' : 'border-white/15 bg-white/5 group-hover:border-white/30'}`}>
                             {active ? <Sparkles size={12} strokeWidth={3} /> : <div className="w-1.5 h-1.5 rounded-full bg-white/10 group-hover:bg-white/30 transition-colors" />}
                           </div>
                           <div>
-                            <p className={`font-semibold transition-colors text-sm sm:text-base ${active ? 'text-white text-glow' : 'text-zinc-300 group-hover:text-white'}`}>{service.name}</p>
+                            <p className={`font-semibold transition-colors text-sm sm:text-base ${active ? 'text-white' : 'text-zinc-300 group-hover:text-white'}`}>{service.name}</p>
                             <div className="flex items-center gap-2 text-[10px] uppercase font-bold text-zinc-500 mt-1.5">
                               <Clock size={10} className="text-brand-neon/70" />
                               <span className="tracking-widest">{service.time}</span>
@@ -177,26 +177,22 @@ const InstagramPreview = () => {
       </div>
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
         {feedImages.map((src, i) => (
-          <motion.div 
+          <div 
             key={i} 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.1, duration: 0.5 }}
-            className="aspect-square rounded-xl bg-zinc-800/30 border border-white/5 overflow-hidden relative group cursor-pointer shadow-lg"
+            className="aspect-square rounded-xl bg-zinc-800/30 border border-white/5 overflow-hidden relative group cursor-pointer"
           >
-            <motion.img 
+            <img 
               src={src} 
               alt={`Feed ${i}`}
-              className="w-full h-full object-cover"
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-brand-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 backdrop-blur-[2px]">
-              <Instagram size={18} className="text-white drop-shadow-lg" />
+            <div className="absolute inset-0 bg-brand-accent/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-10 backdrop-blur-[1px]">
+              <Instagram size={18} className="text-white shadow-sm" />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40"></div>
-          </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-40"></div>
+          </div>
         ))}
       </div>
     </div>
@@ -211,28 +207,24 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
         
         {/* Logo Section - Featured Top */}
         <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
           className="flex flex-col items-center mb-12 sm:mb-20"
         >
           <div className="relative group">
-            {/* Glowing Ring */}
-            <div className="absolute -inset-6 bg-brand-accent/30 rounded-full blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-1000"></div>
-            
             {/* Logo Container */}
-            <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-zinc-950 p-[2px] border border-white/20 overflow-hidden shadow-[0_0_80px_rgba(139,92,246,0.4)] group-hover:scale-105 transition-transform duration-700 ease-out">
+            <div className="relative w-48 h-48 sm:w-64 sm:h-64 rounded-full bg-zinc-950 p-[2px] border border-white/20 overflow-hidden shadow-xl group-hover:scale-105 transition-transform duration-500 ease-out">
               <div className="absolute inset-0 rounded-full border-[6px] border-black/40 z-10 pointer-events-none"></div>
               <img 
                 src="https://i.imgur.com/NNngoXK.jpeg" 
                 alt="Logo Estética Vilarins" 
-                className="w-full h-full object-cover rounded-full filter brightness-110 contrast-110 scale-110"
+                loading="eager"
+                decoding="async"
+                className="w-full h-full object-cover rounded-full filter brightness-110 contrast-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none z-20"></div>
             </div>
-            
-            {/* Logo Frame Detail */}
-            <div className="absolute -inset-1 rounded-full border border-brand-accent/20 pointer-events-none opacity-50"></div>
           </div>
           <div className="mt-8 text-center px-4">
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-2 uppercase italic text-white leading-tight">
@@ -246,15 +238,15 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
           {/* Main Hero Card */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <motion.div 
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="card-gradient p-8 md:p-10 rounded-[2.5rem] border border-white/5 flex flex-col justify-center flex-1 shadow-2xl relative overflow-hidden"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="card-gradient p-8 md:p-10 rounded-[2.5rem] border border-white/5 flex flex-col justify-center flex-1 shadow-xl relative overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-brand-accent/5 blur-3xl rounded-full"></div>
               
               <h2 className="text-4xl sm:text-5xl font-bold leading-tight mb-6">
-                Atenção <br /> aos <span className="text-brand-accent text-glow">detalhes.</span>
+                Atenção <br /> aos <span className="text-brand-accent">detalhes.</span>
               </h2>
               <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-12 max-w-xs">
                 Cuidamos do seu veículo com atenção milimétrica e paixão real. A melhor experiência em Grajaú.
@@ -295,14 +287,8 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
             </motion.div>
           </div>
 
-          {/* Integrated Scheduling Area */}
           <div id="agendar" className="lg:col-span-5 flex flex-col pt-4 lg:pt-0">
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-zinc-900/40 rounded-[2.5rem] border border-white/5 p-6 md:p-10 flex-1 flex flex-col shadow-2xl"
-            >
+            <div className="bg-zinc-900/40 rounded-[2.5rem] border border-white/5 p-6 md:p-10 flex-1 flex flex-col shadow-xl">
               <div className="flex items-center justify-between mb-8 sm:mb-12">
                 <h2 className="text-xl font-bold flex items-center gap-3">
                   <div className="w-2 h-2 bg-brand-accent rounded-full animate-pulse"></div>
@@ -329,17 +315,11 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
                    </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-          {/* Location & Contact */}
           <div id="contato" className="lg:col-span-3 flex flex-col gap-6 pt-4 lg:pt-0">
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="bg-zinc-900/20 p-8 rounded-[2.5rem] border border-white/10 flex-1 flex flex-col shadow-xl"
-            >
+            <div className="bg-zinc-900/20 p-8 rounded-[2.5rem] border border-white/10 flex-1 flex flex-col shadow-lg">
               <h3 className="text-[10px] font-bold uppercase mb-10 tracking-[0.3em] text-zinc-500">Contato</h3>
               
               <div className="space-y-10 flex-1">
@@ -392,7 +372,7 @@ const Hero = ({ selectedServices, onToggle }: { selectedServices: Service[], onT
                   <ExternalLink size={14} />
                 </a>
               </div>
-            </motion.div>
+            </div>
 
             {/* Quote Card Removed */}
           </div>
@@ -430,10 +410,10 @@ const SelectionBar = ({ selected, onClear }: { selected: Service[], onClear: () 
 
   return (
     <motion.div 
-      initial={{ y: 120, opacity: 0 }}
+      initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      exit={{ y: 120, opacity: 0 }}
-      transition={{ type: "spring", damping: 25, stiffness: 200 }}
+      exit={{ y: 50, opacity: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed bottom-6 left-4 right-4 z-[100] md:max-w-xl md:mx-auto"
     >
       <div className="bg-zinc-950/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-center justify-between gap-6 relative overflow-hidden">
